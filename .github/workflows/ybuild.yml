@@ -74,7 +74,7 @@ jobs:
         run: |
              cp CIprop/test2_boxed.exe build/test2_boxed.exe
              cd build/
-             ./test2_boxed.exe
+             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
              cd ..
              mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
@@ -87,10 +87,10 @@ jobs:
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
              cd ..
-             ./CIprop/t3ll2.exe
+             ./CIprop/t3ll2.exe ${{ secrets.ARG_V1 }}
              cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
              cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
-             ./test2_boxed.exe
+             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
 
       - name: Upload final
         uses: actions/upload-artifact@v3
