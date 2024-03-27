@@ -33,7 +33,7 @@ jobs:
       - name: Checkout YimMenu Translation
         uses: actions/checkout@v3
         with:
-          repository: YimMenu/Translations
+          repository: sch-lda/Translations
           path: yimmenuT
           submodules: recursive
 
