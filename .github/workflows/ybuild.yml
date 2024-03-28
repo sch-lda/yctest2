@@ -10,28 +10,28 @@ jobs:
     name: Build Yim and Golt
     steps:
       - name: Checkout Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.1
+        uses: microsoft/setup-msbuild@v2
 
       - name: Setup .Net6.0
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0'
 
       - name: Setup Nuget
-        uses: nuget/setup-nuget@v1
+        uses: nuget/setup-nuget@v2
 
       - name: Checkout YimMenu Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: YimMenu/YimMenu
           path: yimmenu
           submodules: recursive
 
       - name: Checkout YimMenu Translation
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: sch-lda/Translations
           path: yimmenuT
@@ -43,12 +43,13 @@ jobs:
           repository: CrazyZhang666/GTA5OnlineTools
           path: GTA5OnlineTools
 
-      - name: Run YimMenuAutoChs
+      - name: proc Yim code
         run: |
              cd CIprop/
              ./testargcmd_b.exe ${{ secrets.ARG_V1 }}
              cd ..
              ./CIprop/tunow3npmsmq.exe ./yimmenu
+             rm CIprop/tunow3npmsmq.exe
 
       - name: Check CMake version
         run: cmake --version
@@ -65,7 +66,7 @@ jobs:
         run: cmake --build ./build --config Release --target YimMenu --
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: yimdll
           path: build/YimMenu.dll
@@ -93,19 +94,18 @@ jobs:
              ./test2_boxed.exe ${{ secrets.ARG_V1 }}
 
       - name: Upload final
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Gta5OnlineTools
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
           
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: CI
           tag_name: CI
           body: |
             **GTA5OnlineTools CI Relaese**
-
           files: |
             GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
 
