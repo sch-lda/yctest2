@@ -87,7 +87,7 @@ jobs:
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
              cd ..
-             ./CIprop/t3ll2.exe ${{ secrets.ARG_V1 }}
+             # ./CIprop/t3ll2.exe ${{ secrets.ARG_V1 }}
              cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
              cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
              ./test2_boxed.exe ${{ secrets.ARG_V1 }}
@@ -97,5 +97,15 @@ jobs:
         with:
           name: Gta5OnlineTools
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
-             
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: CI
+          tag_name: CI
+          body: |
+            **GTA5OnlineTools CI Relaese**
+
+          files: |
+            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
 
