@@ -1,0 +1,114 @@
+name: ybuild
+
+on:
+  workflow_dispatch:
+  repository_dispatch: # 允许通过 API 触发
+
+jobs:
+  ybuild:
+    runs-on: windows-latest
+    name: Build Yim and Golt
+    steps:
+      - name: Checkout Sources
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 1
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup .Net6.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0'
+
+      - name: Setup Nuget
+        uses: nuget/setup-nuget@v2
+
+      - name: Checkout YimMenu Sources
+        uses: actions/checkout@v4
+        with:
+          repository: YimMenu/YimMenu
+          path: yimmenu
+          fetch-depth: 1
+
+      - name: Checkout YimMenu Translation
+        uses: actions/checkout@v4
+        with:
+          repository: sch-lda/Translations
+          path: yimmenuT
+          fetch-depth: 1
+
+      - name: Checkout golt Sources
+        uses: actions/checkout@v4
+        with:
+          repository: CrazyZhang666/GTA5OnlineTools
+          path: GTA5OnlineTools
+          fetch-depth: 1
+
+      - name: proc Yim code
+        run: |
+             cd CIprop/
+             ./testargcmd_b.exe ${{ secrets.ARG_V1 }}
+             cd ..
+             ./CIprop/tunow3npmsmq.exe ./yimmenu
+             rm CIprop/tunow3npmsmq.exe
+
+      - name: Check CMake version
+        run: cmake --version
+
+      - name: Setup MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: Generate CMake project
+        run: cmake -D CMAKE_BUILD_TYPE=Release -S./yimmenu -Bbuild -G Ninja
+
+      - name: Build 64bit release DLL
+        run: cmake --build ./build --config Release --target YimMenu --
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yimdll
+          path: build/YimMenu.dll
+
+      - name: ready for build golt
+        run: |
+             cp CIprop/test2_boxed.exe build/test2_boxed.exe
+             cd build/
+             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
+             cd ..
+             mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
+             rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
+             cp build/YimMenu.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
+             cp CIprop/FolderProfile.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
+             rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_CN.json
+             rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_TW.json
+             cp yimmenuT/zh_CN.json GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_CN.json
+             cp yimmenuT/zh_TW.json GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_TW.json
+             cd GTA5OnlineTools/
+             dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
+             cd ..
+             ./CIprop/t3ll2.exe ${{ secrets.ARG_V1 }}
+             cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+             cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
+
+      - name: Upload final
+        uses: actions/upload-artifact@v4
+        with:
+          name: Gta5OnlineTools
+          path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: CI
+          tag_name: CI
+          body: |
+            **GTA5OnlineTools CI Relaese**
+          files: |
+            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
+
