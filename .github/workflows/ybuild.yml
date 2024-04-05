@@ -96,12 +96,29 @@ jobs:
              cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
              ./test2_boxed.exe ${{ secrets.ARG_V1 }}
 
-      - name: Upload final
+      - name: Upload GTA5OnlineTools-CI
         uses: actions/upload-artifact@v4
         with:
-          name: Gta5OnlineTools
+          name: GTA5OnlineTools
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
-          
+
+      - name: ready for build golt with runtime
+        run: |
+
+             cp CIprop/FolderProfile-withruntime.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
+             cd GTA5OnlineTools/
+             dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
+             cd ..
+             cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+             cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
+
+      - name: Upload GTA5OnlineTools-CI-with-runtime
+        uses: actions/upload-artifact@v4
+        with:
+          name: GTA5OnlineTools_runtime
+          path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
