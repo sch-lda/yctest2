@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: sch-lda/YimMenu
-          ref: 'chattranslate'
+          ref: 'chattranslator-online'
           path: yimmenu
           fetch-depth: 1
 
