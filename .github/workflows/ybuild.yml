@@ -43,6 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: CrazyZhang666/GTA5OnlineTools
+          ref: '4ec6e4dbf23af8503fc4c4b71bfc76374f115327'
           path: GTA5OnlineTools
           fetch-depth: 1
 
@@ -101,7 +102,17 @@ jobs:
         with:
           name: GTA5OnlineTools
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
-
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: CI
+          tag_name: CI
+          body: |
+            **GTA5OnlineTools CI Relaese**
+          files: |
+            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
+            
       - name: ready for build golt with runtime
         run: |
 
@@ -119,13 +130,4 @@ jobs:
           name: GTA5OnlineTools_runtime
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: CI
-          tag_name: CI
-          body: |
-            **GTA5OnlineTools CI Relaese**
-          files: |
-            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
 
