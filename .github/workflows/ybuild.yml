@@ -28,7 +28,8 @@ jobs:
       - name: Checkout YimMenu Sources
         uses: actions/checkout@v4
         with:
-          repository: YimMenu/YimMenu
+          repository: sch-lda/YimMenu
+          ref: 'online_ad_list'
           path: yimmenu
           fetch-depth: 1
 
