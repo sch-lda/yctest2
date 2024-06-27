@@ -61,7 +61,7 @@ jobs:
       - name: Setup MSVC environment
         uses: ilammy/msvc-dev-cmd@v1
         with:
-          toolset: 14.11
+          toolset: 14.38.33135
           arch: amd64
 
       - name: Generate CMake project
