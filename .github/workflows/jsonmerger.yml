@@ -28,9 +28,10 @@ jobs:
 
     - name: Commit and push changes
       run: |
+        cd Lua
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add merged.json
+        git add lua_lang.json
         git commit -m "Merged JSON files"
         git push
       env:
