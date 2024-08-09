@@ -34,3 +34,5 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
 - [RandomEvents](https://github.com/YimMenu-Lua/RandomEvents)
 
 - [MiniGameHack](https://github.com/YimMenu-Lua/MiniGameHack)
+
+- [GanVan](https://github.com/YimMenu-Lua/GunVan)
