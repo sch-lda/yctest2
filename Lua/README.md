@@ -27,6 +27,8 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
     " is available.\\nWarning: Tunable is not active.": " 可用.\\n警告: 可调整项未激活.",
 ```
 
+注: 如果遇到lua作者使用`\10`代替`\n`的情况，翻译时键和值都按`\n`处理，因为Yimmenu会自动将`\10`转换为`\n`。
+
 ## 已翻译Lua
 
 - [DailyCollectibles](https://github.com/YimMenu-Lua/DailyCollectibles)
