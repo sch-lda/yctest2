@@ -26,3 +26,11 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
 ```json
     " is available.\\nWarning: Tunable is not active.": " 可用.\\n警告: 可调整项未激活.",
 ```
+
+## 已翻译Lua
+
+- [DailyCollectibles](https://github.com/YimMenu-Lua/DailyCollectibles)
+
+- [RandomEvents](https://github.com/YimMenu-Lua/RandomEvents)
+
+- [MiniGameHack](https://github.com/YimMenu-Lua/MiniGameHack)
