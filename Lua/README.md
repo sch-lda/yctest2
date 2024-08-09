@@ -5,3 +5,24 @@
 luas文件夹存放各英文lua的语言文件，格式为json，文件名应为英文lua文件名，如`DailyCollectibles.json`。
 
 lua_lang.json由Github Action自动生成，合并luas文件夹的所有json，无需手动修改。客户端将获取此文件进行翻译。
+
+Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧的成为值(Value).键(Key)为英文Lua中原始的字符串,值(Value)为对应的中文翻译.
+
+键(Key)中不能出现转义字符，例如`\n`.译者应在json文件里将`\n`写为`\\n`避免json文件在合并时出错,用户使用时Yimmenu将自动完成识别.
+
+正确示例:
+```json
+    " is available.\\nWarning: Tunable is not active.": " 可用.\n警告: 可调整项未激活.",
+```
+错误示例1:
+```json
+    " is available.\nWarning: Tunable is not active.": " 可用.\n警告: 可调整项未激活.",
+```
+错误示例2:
+```json
+    " is available.\nWarning: Tunable is not active.": " 可用.\\n警告: 可调整项未激活.",
+```
+错误示例3:
+```json
+    " is available.\\nWarning: Tunable is not active.": " 可用.\\n警告: 可调整项未激活.",
+```
