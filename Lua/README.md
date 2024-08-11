@@ -43,6 +43,8 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
 
 - [YimResupplier](https://github.com/YimMenu-Lua/YimResupplier)
 
+- [Extras-Addon-for-YimMenu（已完成部分）](https://github.com/Deadlineem/Extras-Addon-for-YimMenu)
+
 ## 使用方法
 
 方法1: 下载[小助手测试版](https://github.com/sch-lda/yctest2/releases/tag/CI), 导入受支持的Lua, 将自动进行翻译
