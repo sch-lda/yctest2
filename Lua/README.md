@@ -43,7 +43,9 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
 
 - [YimResupplier](https://github.com/YimMenu-Lua/YimResupplier)
 
-- [Extras-Addon-for-YimMenu（已完成部分）](https://github.com/Deadlineem/Extras-Addon-for-YimMenu)
+- [Extras-Addon-for-YimMenu](https://github.com/Deadlineem/Extras-Addon-for-YimMenu)
+
+- [PayphoneHits](https://github.com/YimMenu-Lua/PayphoneHits)
 
 ## 使用方法
 
