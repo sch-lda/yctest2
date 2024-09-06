@@ -49,6 +49,6 @@ Json中`"Teleport to Vehicle": "传送到载具",`左侧的成为键(Key),右侧
 
 ## 使用方法
 
-方法1: 下载[小助手测试版](https://github.com/sch-lda/yctest2/releases/tag/CI), 导入受支持的Lua, 将自动进行翻译
+方法1: 从小助手导入受支持的Lua, 使用小助手注入Yimmenu, 确保 Yimmenu设置-Lua管理-Lua翻译 看开关处于打开状态，已翻译Lua将自动显示为中文
 
 方法2: 从源代码构建 https://github.com/sch-lda/YimMenu/tree/upd-test
