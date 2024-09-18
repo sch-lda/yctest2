@@ -36,7 +36,7 @@ jobs:
       - name: Checkout golt Sources
         uses: actions/checkout@v4
         with:
-          repository: sch-lda/yctest2/GTA5OnlineTools
+          repository: sch-lda/GTA5OnlineTools
           path: GTA5OnlineTools
           fetch-depth: 1
 
