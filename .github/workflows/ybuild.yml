@@ -98,9 +98,9 @@ jobs:
           name: CI
           tag_name: CI
           body: |
-            **GTA5OnlineTools CI Relaese**
+            **YimMenu for GOLT CI Relaese**
           files: |
-            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
+            build/YimMenu.dll
             
       - name: ready for build golt with runtime
         run: |
