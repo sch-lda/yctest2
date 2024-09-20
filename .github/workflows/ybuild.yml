@@ -98,9 +98,9 @@ jobs:
           name: CI
           tag_name: CI
           body: |
-            **YimMenu for GOLT CI Relaese**
+            **由于小助手已停止更新，自动构建程序将仅同步yimmenu**
           files: |
-            build/YimMenu.dll
+            GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
             
       - name: ready for build golt with runtime
         run: |
