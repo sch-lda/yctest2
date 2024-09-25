@@ -40,13 +40,6 @@ jobs:
              git commit -m "merge from origin"
              git push origin main
 
-      - name: Checkout YimMenu Translation
-        uses: actions/checkout@v4
-        with:
-          repository: sch-lda/Translations
-          path: yimmenuT
-          fetch-depth: 1
-
       - name: Checkout golt Sources
         uses: actions/checkout@v4
         with:
@@ -92,10 +85,6 @@ jobs:
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
              cp build/YimMenu.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
              cp CIprop/FolderProfile.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
-             rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_CN.json
-             rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_TW.json
-             cp yimmenuT/zh_CN.json GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_CN.json
-             cp yimmenuT/zh_TW.json GTA5OnlineTools/GTA5Shared/Files/YimMenu/zh_TW.json
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
              cd ..
@@ -116,7 +105,7 @@ jobs:
           name: CI
           tag_name: CI
           body: |
-            **GTA5OnlineTools CI Relaese**
+            **由于小助手已停止更新，自动构建程序将仅同步yimmenu**
           files: |
             GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
             
