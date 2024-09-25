@@ -33,12 +33,6 @@ jobs:
       - name: Checkout YimMenu Sources
         run: |
              git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/sch-lda/yim-golt.git
-             cd yim-golt
-             git remote add yim-origin https://gitlab.com/YimMenu/YimMenu.git
-             git fetch yim-origin
-             git merge yim-origin/master
-             git commit -m "merge from origin"
-             git push origin main
 
       - name: Checkout golt Sources
         uses: actions/checkout@v4
