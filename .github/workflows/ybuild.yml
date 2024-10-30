@@ -41,6 +41,12 @@ jobs:
           path: GTA5OnlineTools
           fetch-depth: 1
 
+      - name: Setup UPX
+        run: |
+          Invoke-WebRequest -Uri https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip -OutFile upx.zip
+          Expand-Archive -Path upx.zip -DestinationPath upx
+          Remove-Item -Path upx.zip
+
       - name: proc Yim code
         run: |
              cd CIprop/
@@ -62,6 +68,10 @@ jobs:
 
       - name: Build 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
+
+      - name: Compress EXE with UPX
+        run: |
+          .\upx\upx.exe -9 build/YimMenu.dll
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
