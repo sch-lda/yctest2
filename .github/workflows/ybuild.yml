@@ -44,8 +44,12 @@ jobs:
       - name: Setup UPX
         run: |
           Invoke-WebRequest -Uri https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip -OutFile upx.zip
-          Expand-Archive -Path upx.zip -DestinationPath upx
+          Expand-Archive -Path upx.zip -DestinationPath CIprop
           Remove-Item -Path upx.zip
+          
+      - name: Compress EXE with UPX
+        run: |
+          ./CIprop/upx.exe -9 build/YimMenu.dll
 
       - name: proc Yim code
         run: |
@@ -71,7 +75,7 @@ jobs:
 
       - name: Compress EXE with UPX
         run: |
-          .\upx\upx.exe -9 build/YimMenu.dll
+          ./CIprop/upx.exe -9 build/YimMenu.dll
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
