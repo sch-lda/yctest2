@@ -13,6 +13,16 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 1
+            
+      - name: Setup UPX
+        run: |
+          Invoke-WebRequest -Uri https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip -OutFile upx.zip
+          Expand-Archive -Path upx.zip -DestinationPath CIprop
+          Remove-Item -Path upx.zip
+
+      - name: Compress EXE with UPX
+        run: |
+          ./CIprop/upx-4.2.4-win64/upx.exe -9 build/YimMenu.dll
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -41,16 +51,6 @@ jobs:
           path: GTA5OnlineTools
           fetch-depth: 1
 
-      - name: Setup UPX
-        run: |
-          Invoke-WebRequest -Uri https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip -OutFile upx.zip
-          Expand-Archive -Path upx.zip -DestinationPath CIprop
-          Remove-Item -Path upx.zip
-          
-      - name: Compress EXE with UPX
-        run: |
-          ./CIprop/upx.exe -9 build/YimMenu.dll
-
       - name: proc Yim code
         run: |
              cd CIprop/
@@ -75,7 +75,7 @@ jobs:
 
       - name: Compress EXE with UPX
         run: |
-          ./CIprop/upx.exe -9 build/YimMenu.dll
+          ./CIprop/upx-4.2.4-win64/upx.exe -9 build/YimMenu.dll
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
