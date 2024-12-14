@@ -13,12 +13,6 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 1
-            
-      - name: Setup git credentials
-        run: |
-          git config --global url."https://$GITHUB_PAT@github.com/".insteadOf "https://github.com/"
-        env:
-          GITHUB_PAT: ${{ secrets.GIT_CRT }}
           
       - name: Setup UPX
         run: |
@@ -41,7 +35,13 @@ jobs:
         run: |
              git config --global user.name "sch-bot"
              git config --global user.email "you@example.com"
-
+            
+      - name: Setup git credentials
+        run: |
+          git config --global url."https://$GITHUB_PAT@github.com/".insteadOf "https://github.com/"
+        env:
+          GITHUB_PAT: ${{ secrets.GIT_CRT }}
+          
       - name: Checkout YimMenu Sources
         run: |
              git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/sch-lda/yim-golt.git
