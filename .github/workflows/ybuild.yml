@@ -18,7 +18,7 @@ jobs:
         run: |
           git config --global url."https://$GITHUB_PAT@github.com/".insteadOf "https://github.com/"
         env:
-          GITHUB_PAT: ${{ secrets.git_crt }}
+          GITHUB_PAT: ${{ secrets.GIT_CRT }}
           
       - name: Setup UPX
         run: |
