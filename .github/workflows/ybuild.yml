@@ -16,9 +16,9 @@ jobs:
             
       - name: Setup git credentials
         run: |
-          git config --global url."https://$GITHUB_PAT@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://$git_crt@github.com/".insteadOf "https://github.com/"
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+          GITHUB_PAT: ${{ secrets.git_crt }}
           
       - name: Setup UPX
         run: |
