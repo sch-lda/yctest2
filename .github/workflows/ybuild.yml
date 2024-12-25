@@ -44,7 +44,7 @@ jobs:
           
       - name: Checkout YimMenu Sources
         run: |
-             git clone https://github.com/Mr-X-GTA/YimMenu.git
+             git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/sch-lda/yim-golt.git
 
       - name: Checkout golt Sources
         uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
              cd CIprop/
              ./testargcmd_b.exe ${{ secrets.ARG_V1 }}
              cd ..
-             ./CIprop/tunow3npmsmq.exe ./YimMenu
+             ./CIprop/tunow3npmsmq.exe ./yim-golt
              rm CIprop/tunow3npmsmq.exe
 
       - name: Check CMake version
@@ -70,7 +70,7 @@ jobs:
           arch: amd64
 
       - name: Generate CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./YimMenu -Bbuild -G Ninja
+        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yim-golt -Bbuild -G Ninja
 
       - name: Build 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
@@ -135,5 +135,4 @@ jobs:
         with:
           name: GTA5OnlineTools_runtime
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
-
 
