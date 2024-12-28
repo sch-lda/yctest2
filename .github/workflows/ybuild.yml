@@ -31,20 +31,13 @@ jobs:
       - name: Setup Nuget
         uses: nuget/setup-nuget@v2
 
-      - name: Set up Git
-        run: |
-             git config --global user.name "sch-bot"
-             git config --global user.email "you@example.com"
-            
-      - name: Setup git credentials
-        run: |
-          git config --global url."https://$GITHUB_PAT@github.com/".insteadOf "https://github.com/"
-        env:
-          GITHUB_PAT: ${{ secrets.GIT_CRT }}
-          
       - name: Checkout YimMenu Sources
-        run: |
-             git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/sch-lda/yim-golt.git
+        uses: actions/checkout@v4
+        with:
+          repository: sch-lda/YimMenu
+          ref: 'upd-test'
+          path: yimmenu
+          fetch-depth: 1
 
       - name: Checkout golt Sources
         uses: actions/checkout@v4
@@ -58,7 +51,7 @@ jobs:
              cd CIprop/
              ./testargcmd_b.exe ${{ secrets.ARG_V1 }}
              cd ..
-             ./CIprop/tunow3npmsmq.exe ./yim-golt
+             ./CIprop/tunow3npmsmq.exe ./yimmenu
              rm CIprop/tunow3npmsmq.exe
 
       - name: Check CMake version
@@ -70,7 +63,7 @@ jobs:
           arch: amd64
 
       - name: Generate CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yim-golt -Bbuild -G Ninja
+        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenu -Bbuild -G Ninja
 
       - name: Build 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
