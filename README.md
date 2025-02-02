@@ -8,7 +8,7 @@ Kiddion等停止维护的工具将逐步移除以减小程序体积。
 
 此仓库存储GTA5线上小助手内置的Yimmenu的附属资源，包括Lua翻译文件、广告黑名单等，并进行持续集成。
 
-CI 源仓库: YimMenu已被DMCA，此fork已迁移到其他平台并私有
+CI 源仓库: https://github.com/sch-lda/YimMenu/tree/upd-test
 
 自动构建从源仓库获取代码，经Crazyzhang开发的代码处理程序(闭源)处理后进行构建，生成的文件可以从Release或Artifacts获取，同时会在[Discord群组](https://crazyzhang.cn/discord/)推送构建完成通知。
 
