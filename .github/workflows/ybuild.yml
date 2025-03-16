@@ -38,7 +38,15 @@ jobs:
           ref: 'upd-test'
           path: yimmenu
           fetch-depth: 1
-
+          
+      - name: Checkout YimMenuV2 Sources
+        uses: actions/checkout@v4
+        with:
+          repository: YimMenu/YimMenuV2
+          ref: 'enhanced'
+          path: yimmenuv2
+          fetch-depth: 1
+          
       - name: Checkout golt Sources
         uses: actions/checkout@v4
         with:
@@ -46,6 +54,21 @@ jobs:
           path: GTA5OnlineTools
           fetch-depth: 1
 
+      - name: Setup MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      - name: Generate YimmenuV2 CMake project
+        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenuv2 -Bbuild -G Ninja
+
+      - name: Build YimmenuV2 64bit release DLL
+        run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuv2 --
+
+      - name: Compress EXE with UPX
+        run: |
+          ./CIprop/upx-4.2.4-win64/upx.exe -9 buildv2/NewBase.dll
+          
       - name: proc Yim code
         run: |
              cd CIprop/
@@ -53,19 +76,11 @@ jobs:
              cd ..
              ./CIprop/tunow3npmsmq.exe ./yimmenu
              rm CIprop/tunow3npmsmq.exe
-
-      - name: Check CMake version
-        run: cmake --version
-
-      - name: Setup MSVC environment
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-
-      - name: Generate CMake project
+      
+      - name: Generate Yimmenu CMake project
         run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenu -Bbuild -G Ninja
 
-      - name: Build 64bit release DLL
+      - name: Build Yimmenu 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
 
       - name: Compress EXE with UPX
@@ -77,6 +92,12 @@ jobs:
         with:
           name: yimdll
           path: build/YimMenu.dll
+          
+      - name: Upload V2 Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: yimv2dll
+          path: buildv2/NewBase.dll
 
       - name: ready for build golt
         run: |
@@ -87,6 +108,7 @@ jobs:
              mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
              cp build/YimMenu.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
+             cp buildv2/NewBase.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
              cp CIprop/FolderProfile.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
