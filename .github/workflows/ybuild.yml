@@ -63,7 +63,7 @@ jobs:
         run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
-        run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuv2 --
+        run: cmake --build ./buildv2 --config RelWithDebInfo --target NewBase --
 
       - name: Compress EXE with UPX
         run: |
