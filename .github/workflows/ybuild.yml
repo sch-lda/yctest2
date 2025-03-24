@@ -63,11 +63,11 @@ jobs:
         run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
-        run: cmake --build ./buildv2 --config RelWithDebInfo --target NewBase --
+        run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuV2 --
 
       - name: Compress EXE with UPX
         run: |
-          ./CIprop/upx-4.2.4-win64/upx.exe -9 buildv2/NewBase.dll
+          ./CIprop/upx-4.2.4-win64/upx.exe -9 buildv2/YimMenuV2.dll
           
       - name: proc Yim code
         run: |
@@ -97,7 +97,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: yimv2dll
-          path: buildv2/NewBase.dll
+          path: buildv2/YimMenuV2.dll
 
       - name: ready for build golt
         run: |
@@ -108,7 +108,7 @@ jobs:
              mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
              cp build/YimMenu.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
-             cp buildv2/NewBase.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
+             cp buildv2/YimMenuV2.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
              cp CIprop/FolderProfile.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
