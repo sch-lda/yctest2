@@ -62,13 +62,9 @@ jobs:
           path: GTA5OnlineTools
           fetch-depth: 1
 
-      - name: Setup MSVC environment
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
 
       - name: Generate YimmenuV2 CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=Release -D OPTIMIZE=YES -S./yimmenuv2 -Bbuildv2 -G Ninja
+        run: cmake -D CMAKE_BUILD_TYPE=Release -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
         run: cmake --build ./buildv2 --config Release --target YimMenuV2 --
