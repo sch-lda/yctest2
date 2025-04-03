@@ -31,10 +31,25 @@ jobs:
       - name: Setup Nuget
         uses: nuget/setup-nuget@v2
 
-      - name: Set up CMake
-        uses: Kitware/cmake-action@v1
-        with:
-            cmakeVersion: '3.30.5'
+      - name: Download and Install CMake 3.30.5 (Windows)
+        shell: powershell
+        run: |
+          # 下载 CMake 3.30.5 for Windows x64
+          $cmakeUrl = "https://github.com/Kitware/CMake/releases/download/v3.30.5/cmake-3.30.5-windows-x86_64.zip"
+          $downloadPath = "$env:RUNNER_TEMP\cmake-3.30.5.zip"
+          Invoke-WebRequest -Uri $cmakeUrl -OutFile $downloadPath
+    
+          # 解压到 C:\cmake-3.30.5
+          Expand-Archive -Path $downloadPath -DestinationPath "C:\"
+          Rename-Item -Path "C:\cmake-3.30.5-windows-x86_64" -NewName "C:\cmake-3.30.5"
+    
+          # 添加到 PATH（仅当前 Job 生效）
+          $cmakePath = "C:\cmake-3.30.5\bin"
+          echo "Adding CMake to PATH: $cmakePath"
+          echo "$cmakePath" >> $env:GITHUB_PATH
+    
+      - name: Verify CMake version
+        run: cmake --version
       
       - name: Check CMake version
         run: cmake --version
