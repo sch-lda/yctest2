@@ -60,10 +60,10 @@ jobs:
           arch: amd64
 
       - name: Generate YimmenuV2 CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenuv2 -Bbuildv2 -G Ninja
+        run: cmake -D CMAKE_BUILD_TYPE=Release -D OPTIMIZE=YES -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
-        run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuV2 --
+        run: cmake --build ./buildv2 --config Release --target YimMenuV2 --
 
       - name: Compress EXE with UPX
         run: |
