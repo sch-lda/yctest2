@@ -30,7 +30,12 @@ jobs:
 
       - name: Setup Nuget
         uses: nuget/setup-nuget@v2
-        
+
+      - name: Install CMake 3.30.5
+        uses: actions/setup-cmake@v3
+        with:
+            cmake-version: '3.30.5'  # 指定版本
+      
       - name: Check CMake version
         run: cmake --version
         
