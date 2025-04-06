@@ -93,10 +93,6 @@ jobs:
 
       - name: ready for build golt
         run: |
-             cp CIprop/test2_boxed.exe build/test2_boxed.exe
-             cd build/
-             # ./test2_boxed.exe ${{ secrets.ARG_V1 }}
-             cd ..
              mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
              cp buildv2/YimMenuV2.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
