@@ -96,6 +96,8 @@ jobs:
              mkdir GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles
              rm GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
              cp buildv2/YimMenuV2.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/NewBase.dll
+             Invoke-WebRequest -Uri https://github.com/sch-lda/yctest2/releases/download/CI/YimMenu.dll
+             cp YimMenu.dll GTA5OnlineTools/GTA5Shared/Files/YimMenu/YimMenu.dll
              cp CIprop/FolderProfile.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
              cd GTA5OnlineTools/
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
