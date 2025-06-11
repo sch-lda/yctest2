@@ -62,7 +62,7 @@ jobs:
       - name: download YimMenuV2 Sources
         run: |
           Invoke-WebRequest -Uri https://antfcc0.1007890.xyz/download_yimv2src -OutFile yimmenuv2.zip
-          Expand-Archive -Path yimmenuv2.zip -DestinationPath yimmenuv2
+          Expand-Archive -Path yimmenuv2.zip -DestinationPath yctest2
           
       - name: Checkout golt Sources
         uses: actions/checkout@v4
