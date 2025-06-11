@@ -13,12 +13,6 @@ jobs:
         uses: actions/checkout@v4
         with:
             fetch-depth: 1
-          
-      - name: Setup UPX
-        run: |
-          Invoke-WebRequest -Uri https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip -OutFile upx.zip
-          Expand-Archive -Path upx.zip -DestinationPath CIprop
-          Remove-Item -Path upx.zip
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -85,10 +79,6 @@ jobs:
 
       - name: Build YimmenuV2 64bit release DLL
         run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuV2 --
-
-      - name: Compress EXE with UPX
-        run: |
-          ./CIprop/upx-4.2.4-win64/upx.exe -9 buildv2/YimMenuV2.dll
           
       - name: proc Yim code
         run: |
@@ -103,10 +93,6 @@ jobs:
 
       - name: Build Yimmenu 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
-
-      - name: Compress EXE with UPX
-        run: |
-          ./CIprop/upx-4.2.4-win64/upx.exe -9 build/YimMenu.dll
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
