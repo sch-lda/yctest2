@@ -67,13 +67,10 @@ jobs:
           path: yimmenu
           fetch-depth: 1
           
-      - name: Checkout YimMenuV2 Sources
-        uses: actions/checkout@v4
-        with:
-          repository: YimMenu/YimMenuV2
-          ref: 'enhanced'
-          path: yimmenuv2
-          fetch-depth: 1
+      - name: download YimMenuV2 Sources
+        run: |
+          Invoke-WebRequest -Uri https://antfcc0.1007890.xyz/download_yimv2src -OutFile yimmenuv2.zip
+          Expand-Archive -Path yimmenuv2.zip -DestinationPath ./
           
       - name: Checkout golt Sources
         uses: actions/checkout@v4
@@ -84,10 +81,10 @@ jobs:
 
 
       - name: Generate YimmenuV2 CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=Release -S./yimmenuv2 -Bbuildv2 -G Ninja
+        run: cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=RelWithDebInfo -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
-        run: cmake --build ./buildv2 --config Release --target YimMenuV2 --
+        run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuV2 --
 
       - name: Compress EXE with UPX
         run: |
