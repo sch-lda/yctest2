@@ -31,7 +31,7 @@ jobs:
           # 下载 CMake 4.0.2 for Windows x64
           $cmakeUrl = "https://github.com/Kitware/CMake/releases/download/v4.0.2/cmake-4.0.2-windows-x86_64.zip"
           $downloadPath = "$env:RUNNER_TEMP\cmake-4.0.2.zip"
-          Invoke-WebRequest -Uri $cmakeUrl -OutFile $downloadPath
+          curl -L -o $downloadPath $cmakeUrl
     
           # 解压到 C:\cmake-4.0.2
           Expand-Archive -Path $downloadPath -DestinationPath "C:\"
