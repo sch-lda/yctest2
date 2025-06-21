@@ -8,11 +8,19 @@ Kiddion等停止维护的工具将逐步移除以减小程序体积。
 
 此仓库存储GTA5线上小助手内置的Yimmenu的附属资源，包括Lua翻译文件、广告黑名单等，并进行持续集成。
 
-CI 源仓库: https://github.com/sch-lda/YimMenu/tree/upd-test
-
+YimV1 CI 源仓库: https://github.com/sch-lda/YimMenu/tree/upd-test \
+YimV2直接使用官方仓库处理 \
 自动构建从源仓库获取代码，经Crazyzhang开发的代码处理程序(闭源)处理后进行构建，生成的文件可以从Release或Artifacts获取，同时会在[Discord群组](https://crazyzhang.cn/discord/)推送构建完成通知。
 
 自动构建依赖几个二进制文件，且存在鉴权，必须从外部以API的形式触发，且fork后无法运行。
+
+小助手-exe https://github.com/sch-lda/yctest2/releases/download/CI/GTA5OnlineTools.exe \
+小助手-源码 https://github.com/sch-lda/GTA5OnlineTools \
+YimV1汉化版-dll https://github.com/sch-lda/yctest2/releases/download/CI/YimMenu.dll \
+YimV1 sch分支-源码(与dll不完全相同,具体看该仓库Readme) https://github.com/sch-lda/YimMenu/tree/upd-test \
+YimV2汉化版-dll https://github.com/sch-lda/yctest2/releases/download/CI/YimMenuV2.dll \
+YimV2汉化版-源码(与构建dll所用源码完全一致) https://antfcc0.1007890.xyz/download_yimv2src \
+以上链接对应的文件随自动构建工作流自动更新，链接通常不需要更改 
 
 ## 如何使用Issues和Pull request
 
