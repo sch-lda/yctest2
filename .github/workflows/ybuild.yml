@@ -89,7 +89,7 @@ jobs:
              rm CIprop/tunow3npmsmq.exe
       
       - name: Generate Yimmenu CMake project
-        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -D OPTIMIZE=YES -S./yimmenu -Bbuild -G Ninja
+        run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -D OPTIMIZE=YES -S./yimmenu -Bbuild -G Ninja
 
       - name: Build Yimmenu 64bit release DLL
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
