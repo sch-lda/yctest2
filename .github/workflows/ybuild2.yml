@@ -106,7 +106,9 @@ jobs:
           name: CI
           tag_name: CI
           body: |
-            **由于小助手已停止更新，自动构建程序将仅同步yimmenu v2**
+            **由于小助手已停止更新，自动构建程序将仅同步yimmenu**
+            由于没有内置中文字体，yimmenuV2首次注入需要使用GTA5OnlineTools.exe，注入时自动释放字体文件到配置目录。之后才能使用其他注入器注入dll，否则中文全部显示为问号。
+            构建所使用的源码和文件说明等信息详见此仓库的readme.md文件
           files: |
             GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
             buildv2/YimMenuV2.dll
