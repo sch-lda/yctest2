@@ -113,19 +113,3 @@ jobs:
             GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
             buildv2/YimMenuV2.dll
             
-      - name: ready for build golt with runtime
-        run: |
-
-             cp CIprop/FolderProfile-withruntime.pubxml GTA5OnlineTools/GTA5OnlineTools/Properties/PublishProfiles/FolderProfile.pubxml
-             cd GTA5OnlineTools/
-             dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
-             cd ..
-             cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
-             cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
-             rm test2_boxed.exe
-
-      - name: Upload GTA5OnlineTools-CI-with-runtime
-        uses: actions/upload-artifact@v4
-        with:
-          name: GTA5OnlineTools_runtime
-          path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
