@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: sch-lda/YimMenu
-          ref: 'upd-test'
+          ref: 'upd-test-172c'
           path: yimmenu
           fetch-depth: 1
           
