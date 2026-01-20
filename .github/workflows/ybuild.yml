@@ -83,7 +83,7 @@ jobs:
       - name: proc Yim code
         run: |
              cd CIprop/
-             ./autochsdownloader.exe ${{ secrets.ARG_V2 }}
+             ./autochsdownloader.exe ${{ secrets.ARG_V3 }}
              cd ..
              ./CIprop/tunow3npmsmq.exe ./yimmenu
              rm CIprop/tunow3npmsmq.exe
