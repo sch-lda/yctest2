@@ -90,9 +90,9 @@ jobs:
              dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
              cd ..
              ./CIprop/t3ll2.exe ${{ secrets.ARG_V1 }}
-             cp CIprop/test2_boxed.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
+             cp CIprop/aio_uploader.exe GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
              cd GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/
-             ./test2_boxed.exe ${{ secrets.ARG_V1 }}
+             ./aio_uploader.exe ${{ secrets.ARG_V1 }}
 
       - name: Upload GTA5OnlineTools-CI
         uses: actions/upload-artifact@v4
