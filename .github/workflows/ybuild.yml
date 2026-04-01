@@ -11,6 +11,7 @@ jobs:
     env:
       CCACHE_DIR: ${{ github.workspace }}\.ccache
       CCACHE_MAXSIZE: 1G
+      CCACHE_LOGFILE: ${{ github.workspace }}\ccache-ybuild.log
     steps:
       - name: Checkout Sources
         uses: actions/checkout@v6
@@ -45,6 +46,7 @@ jobs:
         run: |
           "C:\Program Files\ccache" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           New-Item -ItemType Directory -Force -Path $env:CCACHE_DIR | Out-Null
+          if (Test-Path $env:CCACHE_LOGFILE) { Remove-Item -LiteralPath $env:CCACHE_LOGFILE -Force }
           ccache --zero-stats
           ccache --show-config
     
@@ -98,7 +100,15 @@ jobs:
         run: cmake --build ./build --config RelWithDebInfo --target YimMenu --
 
       - name: Show ccache stats
-        run: ccache --show-stats
+        run: ccache --show-stats --verbose
+
+      - name: Upload ccache log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ccache-ybuild-log
+          path: ${{ env.CCACHE_LOGFILE }}
+          if-no-files-found: warn
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
