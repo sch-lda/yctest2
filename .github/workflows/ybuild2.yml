@@ -8,6 +8,9 @@ jobs:
   ybuild2:
     runs-on: windows-latest
     name: Build Yim v2 and Golt
+    env:
+      CCACHE_DIR: ${{ github.workspace }}\.ccache
+      CCACHE_MAXSIZE: 1G
     steps:
       - name: Checkout Sources
         uses: actions/checkout@v4
@@ -24,6 +27,26 @@ jobs:
 
       - name: Setup Nuget
         uses: nuget/setup-nuget@v2
+
+      - name: Restore ccache cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ${{ runner.os }}-ccache-ybuild2-${{ github.ref_name }}-build2
+          restore-keys: |
+            ${{ runner.os }}-ccache-ybuild2-${{ github.ref_name }}-
+            ${{ runner.os }}-ccache-ybuild2-
+
+      - name: Install ccache
+        run: choco install ccache -y
+
+      - name: Initialize ccache
+        shell: pwsh
+        run: |
+          "C:\Program Files\ccache" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          New-Item -ItemType Directory -Force -Path $env:CCACHE_DIR | Out-Null
+          ccache --zero-stats
+          ccache --show-config
     
       - name: Verify CMake version
         run: cmake --version
@@ -50,10 +73,13 @@ jobs:
 
 
       - name: Generate YimmenuV2 CMake project
-        run: cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=RelWithDebInfo -S./yimmenuv2 -Bbuildv2 -G Ninja
+        run: cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=RelWithDebInfo -S./yimmenuv2 -Bbuildv2 -G Ninja
 
       - name: Build YimmenuV2 64bit release DLL
         run: cmake --build ./buildv2 --config RelWithDebInfo --target YimMenuV2 --
+
+      - name: Show ccache stats
+        run: ccache --show-stats
           
       - name: Upload V2 Artifact
         uses: actions/upload-artifact@v4
