@@ -48,9 +48,6 @@ jobs:
           ccache --zero-stats
           ccache --show-config
     
-      - name: Verify CMake version
-        run: cmake --version
-      
       - name: Check CMake version
         run: cmake --version
         

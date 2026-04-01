@@ -47,9 +47,6 @@ jobs:
           New-Item -ItemType Directory -Force -Path $env:CCACHE_DIR | Out-Null
           ccache --zero-stats
           ccache --show-config
-    
-      - name: Verify CMake version
-        run: cmake --version
       
       - name: Check CMake version
         run: cmake --version
