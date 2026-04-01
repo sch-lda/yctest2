@@ -86,6 +86,11 @@ jobs:
              ./CIprop/tunow3npmsmq.exe ./yimmenu
              rm CIprop/tunow3npmsmq.exe
       
+      - name: Setup MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+          
       - name: Generate Yimmenu CMake project
         run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -D OPTIMIZE=YES -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -S./yimmenu -Bbuild -G Ninja
 
