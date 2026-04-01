@@ -13,23 +13,23 @@ jobs:
       CCACHE_MAXSIZE: 1G
     steps:
       - name: Checkout Sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
             fetch-depth: 1
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@v3
 
       - name: Setup .Net6.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '6.0'
 
       - name: Setup Nuget
-        uses: nuget/setup-nuget@v2
+        uses: nuget/setup-nuget@v3
 
       - name: Restore ccache cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.CCACHE_DIR }}
           key: ${{ runner.os }}-ccache-ybuild-${{ github.ref_name }}-build1
@@ -50,14 +50,9 @@ jobs:
     
       - name: Check CMake version
         run: cmake --version
-        
-      - name: Setup MSVC environment
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
           
       - name: Checkout YimMenu Sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: sch-lda/YimMenu
           ref: 'upd-test'
@@ -70,7 +65,7 @@ jobs:
           Expand-Archive -Path yimmenuv2.zip -DestinationPath ./
           
       - name: Checkout golt Sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: sch-lda/GTA5OnlineTools
           path: GTA5OnlineTools
@@ -101,13 +96,13 @@ jobs:
         run: ccache --show-stats
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: yimdll
           path: build/YimMenu.dll
           
       - name: Upload V2 Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: yimv2dll
           path: buildv2/YimMenuV2.dll
@@ -132,7 +127,7 @@ jobs:
              ./aio_uploader.exe ${{ secrets.ARG_V2 }}
 
       - name: Upload GTA5OnlineTools-CI
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GTA5OnlineTools
           path: GTA5OnlineTools/GTA5OnlineTools/bin/x64/Release/net6.0-windows/publish/win-x64/GTA5OnlineTools.exe
