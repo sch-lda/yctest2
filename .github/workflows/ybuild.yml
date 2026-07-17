@@ -93,6 +93,14 @@ jobs:
         with:
           arch: amd64
           
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+         cmake-version: '3.31.6'
+         
+      - name: Check CMake version
+        run: cmake --version
+          
       - name: Generate Yimmenu CMake project
         run: cmake -D CMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -D OPTIMIZE=YES -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -S./yimmenu -Bbuild -G Ninja
 
